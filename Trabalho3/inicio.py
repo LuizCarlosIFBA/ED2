@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import dif
 
 
 import math
@@ -125,7 +126,7 @@ class BplusTree:
                         j.parent = parentdash
                     self.insert_in_parent(parentNode, value_, parentdash)
 
-# Print the tree
+#Impressão
 def printTree(tree):
     lst = [tree.root]
     level = [0]
@@ -150,22 +151,29 @@ def printTree(tree):
                 flag = 1
 
 
+#Aqui eu gravo os valores e atribuo chaves numericas nele e os nomes das cidades
 record_len = 3
-bplustree = BplusTree(record_len)
+bplustree = BplusTree(record_len) 
 bplustree.insert('4', 'Cerejeiras')
 bplustree.insert('6', 'Corumbiara')
 bplustree.insert('10', 'Jaru')
 
-#printTree(bplustree)
-
+#abro o arquivo e guardo em uma matriz
 mydata = pd.read_csv("Municipio.csv")
 mydata_array = np.array(mydata)
 
+#preparo duas chaves uma numérica e outra alfabética e assim utilizarei para fazer a busca e confirmar
+#se os valores buscados existem ou não
 key1 = '4'
 key2 = 'Cerejeiras'
 if(bplustree.find(key1,key2)):
-    print("Found:")
-    print(mydata_array[int(key1)])
+    print("Cidade encontrada: ",mydata_array[int(key1)],"\n")
 else:
-    print("Not found")
+    print("Valor buscado não encontrado \n")
+
+#Diferencial: arvore printa nome de cidades em forma de pirâmide
+print("\nImpressão personalizada da árvore: \n")
+dif.main()
+
+
 
